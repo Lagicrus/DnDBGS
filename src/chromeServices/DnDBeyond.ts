@@ -1,9 +1,9 @@
-import { SaddlebagItem } from '../types';
+import { SaddlebagItem, SaddlebagItemRarity } from '../types';
 
 export type SaddlebagMagicItem = {
   name: string;
   version: string;
-  rarity: string;
+  rarity: SaddlebagItemRarity;
   baseItemType: string;
   magicItemType: string;
   attunement: boolean | string;

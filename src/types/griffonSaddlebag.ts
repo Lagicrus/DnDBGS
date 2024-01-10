@@ -29,7 +29,7 @@ type SaddlebagItemTag =
   | 'cloak'
   | 'bracers';
 
-type SaddlebagItemRarity =
+export type SaddlebagItemRarity =
   | 'very rare'
   | 'rare'
   | 'uncommon'
