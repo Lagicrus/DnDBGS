@@ -10,7 +10,8 @@ module.exports = {
             paths.appIndexJs
           ].filter(Boolean),
           content: './src/chromeServices/DOMEvaluator.ts',
-          service_worker: './src/chromeServices/service_worker.ts'
+          service_worker: './src/chromeServices/service_worker.ts',
+          dndbi: './src/utils/dndbinject.ts'
         },
         output: {
           ...webpackConfig.output,
