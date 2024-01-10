@@ -117,7 +117,7 @@ function App() {
         {currentTab?.url?.includes('thegriffonssaddlebag.com') ? (
           <Griffon modalOpen={modalOpen} onClick={onClick} />
         ) : (
-          <Beyond />
+          <Beyond magicItem={saddlebagItems} />
         )}
       </header>
     </div>
