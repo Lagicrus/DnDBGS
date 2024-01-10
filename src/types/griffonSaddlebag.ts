@@ -53,7 +53,7 @@ export type SaddlebagItemTypes =
   | 'Staff'
   | 'Scroll';
 
-type SaddlebagItemSubtypes =
+export type SaddlebagItemSubtypes =
   | 'maul'
   | 'longbow'
   | 'dagger and warhammer'
