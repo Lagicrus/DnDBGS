@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { DOMMessage, DOMMessageResponse } from './types';
 import Griffon from './ui/Griffon';
+import Beyond from './ui/Beyond';
 
 async function getCurrentTab() {
   const [tab] = await chrome.tabs.query({
@@ -26,26 +27,9 @@ function App() {
     });
 
     getCurrentTab().then(tab => {
-      console.log(tab);
       setCurrentTab(tab);
       setModalOpen(tab?.includes('thegriffonssaddlebag.com') || false);
     });
-
-    // chrome.tabs &&
-    //   chrome.tabs.query(
-    //     {
-    //       active: true,
-    //       currentWindow: true
-    //     },
-    //     tabs => {
-    //       if (!tabs[0].id) return;
-    //
-    //       setCurrentTab(tabs[0]);
-    //       setModalOpen(
-    //         tabs[0]?.url?.includes('thegriffonssaddlebag.com') || false
-    //       );
-    //     }
-    //   );
   }, []);
 
   function onClick() {
@@ -153,7 +137,9 @@ function App() {
         <p>Loaded Magic Item: {saddlebagItems?.name}</p>
         {currentTab?.includes('thegriffonssaddlebag.com') ? (
           <Griffon modalOpen={modalOpen} onClick={onClick} />
-        ) : null}
+        ) : (
+          <Beyond />
+        )}
       </header>
     </div>
   );
