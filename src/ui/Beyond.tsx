@@ -271,8 +271,14 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
     );
   if (magicItemDescription) {
     if (magicItemDescription[0]) {
-      // TODO handle formatting such as bold
-      magicItemDescription[0].innerHTML = params.magicItem.description;
+      const splitNewlines = params.magicItem.description.split('\n\n');
+      const splitNewlinesWithP = splitNewlines.map(line => `<p>${line}</p>`);
+      const joinedNewlines = splitNewlinesWithP.join('');
+
+      magicItemDescription[0].innerHTML = joinedNewlines.replace(
+        /\*\*(.*?)\*\*/g,
+        '<strong>$1</strong>'
+      );
     }
   }
 
