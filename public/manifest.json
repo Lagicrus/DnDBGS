@@ -1,0 +1,38 @@
+{
+  "name": "DnDBGS",
+  "description": "Import Griffon Saddlebag data into DnDBeyond",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "./static/js/service_worker.js"
+  },
+  "host_permissions": [
+    "*://ledger.thegriffonssaddlebag.com/*",
+    "*://dndbeyond.com/homebrew/creations/create-magic-item/create"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://ledger.thegriffonssaddlebag.com/*",
+        "*://dndbeyond.com/homebrew/creations/create-magic-item/create"
+      ],
+      "js": [
+        "./static/js/content.js"
+      ]
+    }
+  ]
+}
