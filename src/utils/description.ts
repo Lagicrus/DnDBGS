@@ -15,7 +15,12 @@ export function typeDescription(description: string) {
       const splitNewlinesWithP = splitNewlines.map(line => `<p>${line}</p>`);
       const joinedNewlines = splitNewlinesWithP.join('');
 
-      magicItemDescription[0].innerHTML = joinedNewlines.replace(
+      const italicizedBold = joinedNewlines.replace(
+        /\*\*\*(.*?)\*\*\*/g,
+        '<em><strong>$1</strong></em>'
+      );
+
+      magicItemDescription[0].innerHTML = italicizedBold.replace(
         /\*\*(.*?)\*\*/g,
         '<strong>$1</strong>'
       );
