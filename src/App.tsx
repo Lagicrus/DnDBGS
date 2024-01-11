@@ -30,7 +30,7 @@ function App() {
         {currentTab?.url?.includes('thegriffonssaddlebag.com') ? (
           <Griffon modalOpen={modalOpen} setSaddlebagItems={setSaddlebagItem} />
         ) : (
-          <Beyond magicItem={saddlebagItem} />
+          <Beyond magicItem={saddlebagItem} currentTab={currentTab} />
         )}
       </header>
     </div>
