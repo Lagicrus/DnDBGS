@@ -15,9 +15,13 @@ export type SaddlebagMagicItem = {
   attunement: boolean | string;
   attunementDescription: string;
   description: string;
+  base64Image: string;
 };
 
-export const magicItemCreator = (item: SaddlebagItem): SaddlebagMagicItem => {
+export const magicItemCreator = (
+  item: SaddlebagItem,
+  base64Image: string
+): SaddlebagMagicItem => {
   return {
     name: item.name,
     version: '5e',
@@ -29,6 +33,7 @@ export const magicItemCreator = (item: SaddlebagItem): SaddlebagMagicItem => {
     attunementDescription: item.attunement.toString().includes(' by a')
       ? (item.attunement as string)
       : '',
-    description: item.description
+    description: item.description,
+    base64Image
   };
 };

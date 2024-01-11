@@ -28,6 +28,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        {saddlebagItems?.base64Image && (
+          <img
+            id="magic-item"
+            src={saddlebagItems.base64Image}
+            alt="Magic Item"
+          />
+        )}
         <p>Loaded Magic Item: {saddlebagItems?.name}</p>
         {currentTab?.url?.includes('thegriffonssaddlebag.com') ? (
           <Griffon

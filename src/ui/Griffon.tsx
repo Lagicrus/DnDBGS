@@ -56,7 +56,32 @@ const Griffon = ({ modalOpen, setSaddlebagItems }: GriffonProps) => {
         return;
       }
 
-      return magicItemCreator(item);
+      async function imageToBase64(imageUrl: string): Promise<string> {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        return new Promise(resolve => {
+          reader.onloadend = () => {
+            resolve(reader.result as string);
+          };
+        });
+      }
+
+      async function imageIdToImageUrl(imageId: string) {
+        const jsonResponse = await fetch(
+          `https://firebasestorage.googleapis.com/v0/b/griffons-saddlebag.appspot.com/o/images%2F${imageId}%2Fmedium.png`
+        );
+        const json = await jsonResponse.json();
+        return json.downloadTokens;
+      }
+
+      return imageIdToImageUrl(item.imageIds[0]).then(downloadToken => {
+        const imageUrl = `https://firebasestorage.googleapis.com/v0/b/griffons-saddlebag.appspot.com/o/images%2F${item.imageIds[0]}%2Fmedium.png?alt=media&token=${downloadToken}`;
+        return imageToBase64(imageUrl).then(image => {
+          return magicItemCreator(item, image);
+        });
+      });
     }
   }
 
