@@ -8,6 +8,7 @@ import saddlebagWeaponSubtypeToBeyondSubtype from './mappers/baseWeapon';
 import saddlebagRarityToBeyondRarity from './mappers/rarity';
 import { fillInField } from './utils';
 import saddlebagArmorSubtypeToBeyondSubtype from './mappers/baseArmor';
+import saddlebagMagicItemSubtypeToBeyondSubtype from './mappers/baseItem';
 
 async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
   async function selectRarity(
@@ -36,35 +37,6 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
     }
   }
 
-  function selectItemType(
-    element: HTMLSelectElement,
-    itemType: SaddlebagItemTypes
-  ) {
-    switch (itemType) {
-      case 'Wondrous item':
-        element.value = '10';
-        break;
-      case 'Rod':
-        element.value = '5';
-        break;
-      case 'Scroll':
-        element.value = '6';
-        break;
-      case 'Staff':
-        element.value = '7';
-        break;
-      case 'Wand':
-        element.value = '8';
-        break;
-      case 'Ring':
-        element.value = '4';
-        break;
-      case 'Potion':
-        element.value = '3';
-        break;
-    }
-  }
-
   function selectWeaponSubtype(
     element: HTMLSelectElement,
     itemType: SaddlebagItemSubtypes
@@ -81,6 +53,14 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
     itemType: SaddlebagItemSubtypes
   ) {
     const beyondSubtype = saddlebagArmorSubtypeToBeyondSubtype(itemType);
+    element.value = beyondSubtype.toString();
+  }
+
+  function selectMagicItemSubtype(
+    element: HTMLSelectElement,
+    itemType: SaddlebagItemTypes
+  ) {
+    const beyondSubtype = saddlebagMagicItemSubtypeToBeyondSubtype(itemType);
     element.value = beyondSubtype.toString();
   }
 
@@ -120,8 +100,13 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
       magicItemBaseArmorType as HTMLSelectElement,
       params.magicItem.itemSubtype
     );
+  } else {
+    const magicItemType = document.getElementById('field-type');
+    selectMagicItemSubtype(
+      magicItemType as HTMLSelectElement,
+      params.magicItem.magicItemType
+    );
   }
-  // TODO handle armour and items
 
   const magicItemAttunementCheckbox =
     document.getElementsByClassName('fc-fake-item')[0];
