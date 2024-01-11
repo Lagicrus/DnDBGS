@@ -4,19 +4,17 @@ import { DOMMessageResponse } from './types';
 import Griffon from './ui/Griffon';
 import Beyond from './ui/Beyond';
 import { getCurrentTab } from './utils/utils';
+import MagicItem from './ui/MagicItem';
 
 function App() {
-  const [saddlebagItems, setSaddlebagItems] =
+  const [saddlebagItem, setSaddlebagItem] =
     React.useState<Exclude<DOMMessageResponse, boolean>>();
   const [modalOpen, setModalOpen] = React.useState(false);
   const [currentTab, setCurrentTab] = React.useState<chrome.tabs.Tab>();
 
   useEffect(() => {
     chrome.storage.local.get('item').then(item => {
-      setSaddlebagItems(item.item);
-      if (!item?.item) {
-        chrome.storage.local.set({ item: ['test'] });
-      }
+      setSaddlebagItem(item.item);
     });
 
     getCurrentTab().then(tab => {
@@ -28,21 +26,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {saddlebagItems?.base64Image && (
-          <img
-            id="magic-item"
-            src={saddlebagItems.base64Image}
-            alt="Magic Item"
-          />
-        )}
-        <p>Loaded Magic Item: {saddlebagItems?.name}</p>
+        <MagicItem saddlebagItem={saddlebagItem} />
         {currentTab?.url?.includes('thegriffonssaddlebag.com') ? (
-          <Griffon
-            modalOpen={modalOpen}
-            setSaddlebagItems={setSaddlebagItems}
-          />
+          <Griffon modalOpen={modalOpen} setSaddlebagItems={setSaddlebagItem} />
         ) : (
-          <Beyond magicItem={saddlebagItems} />
+          <Beyond magicItem={saddlebagItem} />
         )}
       </header>
     </div>
