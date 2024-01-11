@@ -9,8 +9,6 @@ module.exports = {
               require.resolve('react-dev-utils/webpackHotDevClient'),
             paths.appIndexJs
           ].filter(Boolean),
-          content: './src/chromeServices/DOMEvaluator.ts',
-          service_worker: './src/chromeServices/service_worker.ts',
           dndbi: './src/utils/dndbinject.ts'
         },
         output: {

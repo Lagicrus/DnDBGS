@@ -17,22 +17,8 @@
     "storage",
     "scripting"
   ],
-  "background": {
-    "service_worker": "./static/js/service_worker.js"
-  },
   "host_permissions": [
     "*://ledger.thegriffonssaddlebag.com/*",
-    "*://dndbeyond.com/homebrew/creations/create-magic-item/create"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        "*://ledger.thegriffonssaddlebag.com/*",
-        "*://dndbeyond.com/homebrew/creations/create-magic-item/create"
-      ],
-      "js": [
-        "./static/js/content.js"
-      ]
-    }
+    "*://dndbeyond.com/*"
   ]
 }
