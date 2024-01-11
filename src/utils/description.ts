@@ -15,7 +15,9 @@ export function typeDescription(description: string) {
       const splitNewlinesWithP = splitNewlines.map(line => `<p>${line}</p>`);
       const joinedNewlines = splitNewlinesWithP.join('');
 
-      const italicizedBold = joinedNewlines.replace(
+      const italicized = joinedNewlines.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+      const italicizedBold = italicized.replace(
         /\*\*\*(.*?)\*\*\*/g,
         '<em><strong>$1</strong></em>'
       );
