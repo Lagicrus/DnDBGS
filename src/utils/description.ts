@@ -15,17 +15,19 @@ export function typeDescription(description: string) {
       const splitNewlinesWithP = splitNewlines.map(line => `<p>${line}</p>`);
       const joinedNewlines = splitNewlinesWithP.join('');
 
-      const italicized = joinedNewlines.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-      const italicizedBold = italicized.replace(
+      const italicizedBold = joinedNewlines.replace(
         /\*\*\*(.*?)\*\*\*/g,
         '<em><strong>$1</strong></em>'
       );
 
-      magicItemDescription[0].innerHTML = italicizedBold.replace(
+      const bold = italicizedBold.replace(
         /\*\*(.*?)\*\*/g,
         '<strong>$1</strong>'
       );
+
+      const italicized = bold.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+      magicItemDescription[0].innerHTML = italicized;
     }
   }
 }
