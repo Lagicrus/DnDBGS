@@ -46,3 +46,17 @@ body {
   width: 210px;
   height: 210px;
 }
+
+#settings {
+  top: 18px;
+  right: 18px;
+  position: absolute;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+#optionsSaved {
+  position: absolute;
+  bottom: 5px;
+}

@@ -20,5 +20,11 @@
   "host_permissions": [
     "*://ledger.thegriffonssaddlebag.com/*",
     "*://dndbeyond.com/*"
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mechanicalBag@bag.ext",
+      "strict_min_version": "60.0"
+    }
+  }
 }

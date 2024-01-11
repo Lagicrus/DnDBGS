@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCurrentTab } from '../utils/utils';
-import { DOMMessageResponse, SaddlebagItem } from '../types';
+import { SaddlebagItem } from '../types';
 import {
   magicItemCreator,
   SaddlebagMagicItem
@@ -9,12 +9,12 @@ import InjectionResult = chrome.scripting.InjectionResult;
 
 interface GriffonProps {
   modalOpen: boolean;
-  setSaddlebagItems: React.Dispatch<
-    React.SetStateAction<Exclude<DOMMessageResponse, boolean> | undefined>
+  setSaddlebagItem: React.Dispatch<
+    React.SetStateAction<SaddlebagMagicItem | undefined>
   >;
 }
 
-const Griffon = ({ modalOpen, setSaddlebagItems }: GriffonProps) => {
+const Griffon = ({ modalOpen, setSaddlebagItem }: GriffonProps) => {
   async function onClick() {
     const tabs = await getCurrentTab();
     if (!tabs?.id) return;
@@ -35,7 +35,7 @@ const Griffon = ({ modalOpen, setSaddlebagItems }: GriffonProps) => {
       return;
     }
     await chrome.storage.local.set({ item: res[0].result });
-    setSaddlebagItems(res[0].result);
+    setSaddlebagItem(res[0].result);
 
     function griffonItemInject() {
       const itemData = window.localStorage.getItem('items');

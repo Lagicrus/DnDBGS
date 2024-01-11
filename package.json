@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.18.68",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
@@ -28,7 +24,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "set INLINE_RUNTIME_CHUNK=false && craco build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "run:firefox": "web-ext run --start-url https://ledger.thegriffonssaddlebag.com/ --source-dir build",
     "run:chrome": "web-ext run --target chromium --start-url https://ledger.thegriffonssaddlebag.com/ --source-dir build",
@@ -36,8 +31,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
