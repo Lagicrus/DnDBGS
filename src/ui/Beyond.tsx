@@ -9,12 +9,21 @@ const Beyond = ({
   magicItem: SaddlebagMagicItem | undefined;
   currentTab: chrome.tabs.Tab | undefined;
 }) => {
-  const fillInMagicCreationFrom = async () => {
+  const fillInMagicCreationForm = async () => {
     const currentTab = await getCurrentTab();
     if (!currentTab) return;
     await chrome.scripting.executeScript({
       target: { tabId: currentTab.id as number },
       files: ['static/js/dndbi.js']
+    });
+  };
+
+  const fillInMagicItemDetails = async () => {
+    const currentTab = await getCurrentTab();
+    if (!currentTab) return;
+    await chrome.scripting.executeScript({
+      target: { tabId: currentTab.id as number },
+      files: ['static/js/dndbidetails.js']
     });
   };
 
@@ -26,8 +35,20 @@ const Beyond = ({
       'dndbeyond.com/homebrew/creations/create-magic-item/create'
     )
   ) {
-    return <button onClick={fillInMagicCreationFrom}>Fill in form</button>;
+    return <button onClick={fillInMagicCreationForm}>Fill in form</button>;
   }
+
+  if (
+    currentTab?.url?.match(
+      /dndbeyond\.com\/homebrew\/creations\/magic-items\/\d+-.*\/edit/
+    )
+  ) {
+    return (
+      <button onClick={fillInMagicItemDetails}>Fill in other details</button>
+    );
+  }
+
+  return <p>You are on a unsupported page</p>;
 };
 
 export default Beyond;

@@ -9,7 +9,8 @@ module.exports = {
               require.resolve('react-dev-utils/webpackHotDevClient'),
             paths.appIndexJs
           ].filter(Boolean),
-          dndbi: './src/utils/dndbinject.ts'
+          dndbi: './src/utils/dndbinject.ts',
+          dndbidetails: './src/utils/dndbinjectdetails.ts'
         },
         output: {
           ...webpackConfig.output,
