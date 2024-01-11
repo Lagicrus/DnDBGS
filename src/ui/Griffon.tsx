@@ -1,7 +1,11 @@
 import React from 'react';
 import { getCurrentTab } from '../utils/utils';
 import { DOMMessageResponse, SaddlebagItem } from '../types';
-import { magicItemCreator } from '../chromeServices/DnDBeyond';
+import {
+  magicItemCreator,
+  SaddlebagMagicItem
+} from '../chromeServices/DnDBeyond';
+import InjectionResult = chrome.scripting.InjectionResult;
 
 interface GriffonProps {
   modalOpen: boolean;
@@ -15,7 +19,7 @@ const Griffon = ({ modalOpen, setSaddlebagItems }: GriffonProps) => {
     const tabs = await getCurrentTab();
     if (!tabs?.id) return;
 
-    let res;
+    let res: InjectionResult<SaddlebagMagicItem | undefined>[];
     try {
       res = await chrome.scripting.executeScript({
         target: { tabId: tabs.id as number },
@@ -25,8 +29,12 @@ const Griffon = ({ modalOpen, setSaddlebagItems }: GriffonProps) => {
       console.warn(e.message || e);
       return;
     }
-    console.log(res);
-    chrome.storage.local.set({ item: res[0].result });
+
+    if (!res[0].result) {
+      // Show error message?
+      return;
+    }
+    await chrome.storage.local.set({ item: res[0].result });
     setSaddlebagItems(res[0].result);
 
     function griffonItemInject() {
