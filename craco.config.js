@@ -10,7 +10,8 @@ module.exports = {
             paths.appIndexJs
           ].filter(Boolean),
           dndbi: './src/utils/dndbinject.ts',
-          dndbidetails: './src/utils/dndbinjectdetails.ts'
+          dndbidetails: './src/utils/dndbinjectdetails.ts',
+          gsbi: './src/utils/griffoninject.ts'
         },
         output: {
           ...webpackConfig.output,

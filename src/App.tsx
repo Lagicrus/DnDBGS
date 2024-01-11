@@ -24,6 +24,20 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    function monitorStorage(changes: Record<string, any>, area: string) {
+      if (area === 'local' && changes.item) {
+        setSaddlebagItem(changes.item.newValue);
+      }
+    }
+
+    chrome.storage.onChanged.addListener(monitorStorage);
+
+    return () => {
+      chrome.storage.onChanged.removeListener(monitorStorage);
+    };
+  }, []);
+
   const settingsOnClick = () => {
     setSettingsOpen(!settingsOpen);
   };

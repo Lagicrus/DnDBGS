@@ -1,30 +1,30 @@
 import React, { useEffect } from 'react';
-import { inFirefox } from '../utils/utils';
+import { getSettings, inFirefox } from '../utils/utils';
 
-interface Options {
+export interface Settings {
   showMagicItemImages: boolean;
 }
 
-const defaultOptions: Options = {
+const defaultOptions: Settings = {
   showMagicItemImages: true
 };
 
 export default function SettingsPage() {
-  const [options, setOptions] = React.useState({} as Options);
+  const [options, setOptions] = React.useState({} as Settings);
   const [optionsSaved, setOptionsSaved] = React.useState(false);
 
   useEffect(() => {
-    if (inFirefox()) {
-      browser.storage.sync.get('showMagicItemImages').then(items => {
-        const mergedOptions: Options = Object.assign({}, items, defaultOptions);
-        setOptions(mergedOptions);
-      });
-    } else {
-      chrome.storage.sync.get('showMagicItemImages', items => {
-        const mergedOptions: Options = Object.assign({}, items, defaultOptions);
-        setOptions(mergedOptions);
-      });
-    }
+    getSettings().then(options => {
+      const mergedOptions: Settings = Object.keys(defaultOptions).reduce(
+        (acc, key) => {
+          acc[key as keyof typeof defaultOptions] =
+            options[key] ?? defaultOptions[key as keyof typeof defaultOptions];
+          return acc;
+        },
+        {} as Settings
+      );
+      setOptions(mergedOptions);
+    });
   }, []);
 
   async function toggleShowMagicItemImages() {

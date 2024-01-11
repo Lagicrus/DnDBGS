@@ -15,12 +15,12 @@ export type SaddlebagMagicItem = {
   attunement: boolean | string;
   attunementDescription: string;
   description: string;
-  base64Image: string;
+  base64Image?: string;
 };
 
 export const magicItemCreator = (
   item: SaddlebagItem,
-  base64Image: string
+  base64Image?: string
 ): SaddlebagMagicItem => {
   return {
     name: item.name,

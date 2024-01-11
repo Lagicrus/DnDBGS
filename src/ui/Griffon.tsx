@@ -1,10 +1,6 @@
 import React from 'react';
 import { getCurrentTab } from '../utils/utils';
-import { SaddlebagItem } from '../types';
-import {
-  magicItemCreator,
-  SaddlebagMagicItem
-} from '../chromeServices/DnDBeyond';
+import { SaddlebagMagicItem } from '../chromeServices/DnDBeyond';
 import InjectionResult = chrome.scripting.InjectionResult;
 
 interface GriffonProps {
@@ -23,7 +19,7 @@ const Griffon = ({ modalOpen, setSaddlebagItem }: GriffonProps) => {
     try {
       res = await chrome.scripting.executeScript({
         target: { tabId: tabs.id as number },
-        func: griffonItemInject
+        files: ['static/js/gsbi.js']
       });
     } catch (e: any) {
       console.warn(e.message || e);
@@ -36,53 +32,6 @@ const Griffon = ({ modalOpen, setSaddlebagItem }: GriffonProps) => {
     }
     await chrome.storage.local.set({ item: res[0].result });
     setSaddlebagItem(res[0].result);
-
-    function griffonItemInject() {
-      const itemData = window.localStorage.getItem('items');
-      if (!itemData) {
-        return;
-      }
-
-      const jsonItemData = JSON.parse(itemData);
-      const itemId = document.URL.split('/').pop();
-
-      if (!itemId) {
-        return;
-      }
-
-      const item: SaddlebagItem | undefined = jsonItemData[itemId];
-
-      if (!item) {
-        return;
-      }
-
-      async function imageToBase64(imageUrl: string): Promise<string> {
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        return new Promise(resolve => {
-          reader.onloadend = () => {
-            resolve(reader.result as string);
-          };
-        });
-      }
-
-      async function imageIdToImageUrl(imageId: string) {
-        const jsonResponse = await fetch(
-          `https://firebasestorage.googleapis.com/v0/b/griffons-saddlebag.appspot.com/o/images%2F${imageId}%2Fmedium.png`
-        );
-        const json = await jsonResponse.json();
-        return json.downloadTokens;
-      }
-
-      return imageIdToImageUrl(item.imageIds[0]).then(downloadToken => {
-        const imageUrl = `https://firebasestorage.googleapis.com/v0/b/griffons-saddlebag.appspot.com/o/images%2F${item.imageIds[0]}%2Fmedium.png?alt=media&token=${downloadToken}`;
-        return imageToBase64(imageUrl).then(image => {
-          return magicItemCreator(item, image);
-        });
-      });
-    }
   }
 
   return (

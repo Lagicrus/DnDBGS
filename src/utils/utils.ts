@@ -34,3 +34,11 @@ export function inFirefox() {
     return false;
   }
 }
+
+export async function getSettings() {
+  if (inFirefox()) {
+    return await browser.storage.sync.get('showMagicItemImages');
+  } else {
+    return chrome.storage.sync.get('showMagicItemImages');
+  }
+}
