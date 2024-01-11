@@ -70,6 +70,7 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
 }
 
 chrome.storage.local.get('item', async function (item) {
+  if (!window.location.href.includes('dndbeyond')) return;
   if (item.item) {
     await fillForm({ magicItem: item.item });
   }
