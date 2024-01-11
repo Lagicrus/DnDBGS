@@ -10,13 +10,10 @@ const Beyond = ({
   const onClick = async () => {
     const currentTab = await getCurrentTab();
     if (!currentTab) return;
-    console.log('clicked');
     await chrome.scripting.executeScript({
       target: { tabId: currentTab.id as number },
       files: ['static/js/dndbi.js']
     });
-    // res[0] contains results for the main page of the tab
-    // document.body.textContent = JSON.stringify(res[0].result);
   };
 
   if (!magicItem)
