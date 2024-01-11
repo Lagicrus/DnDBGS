@@ -7,6 +7,7 @@ import {
 import saddlebagWeaponSubtypeToBeyondSubtype from './mappers/baseWeapon';
 import saddlebagRarityToBeyondRarity from './mappers/rarity';
 import { fillInField } from './utils';
+import saddlebagArmorSubtypeToBeyondSubtype from './mappers/baseArmor';
 
 async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
   async function selectRarity(
@@ -75,6 +76,14 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
     element.value = beyondSubtype.toString();
   }
 
+  function selectArmorSubtype(
+    element: HTMLSelectElement,
+    itemType: SaddlebagItemSubtypes
+  ) {
+    const beyondSubtype = saddlebagArmorSubtypeToBeyondSubtype(itemType);
+    element.value = beyondSubtype.toString();
+  }
+
   const magicItemForm = document.getElementById('magic-item-form');
 
   const magicItemName = document.getElementById('field-name');
@@ -103,6 +112,12 @@ async function fillForm(params: { magicItem: SaddlebagMagicItem }) {
       document.getElementById('field-base-weapon');
     selectWeaponSubtype(
       magicItemBaseWeaponType as HTMLSelectElement,
+      params.magicItem.itemSubtype
+    );
+  } else if (params.magicItem.magicItemType === 'Armor') {
+    const magicItemBaseArmorType = document.getElementById('field-base-armor');
+    selectArmorSubtype(
+      magicItemBaseArmorType as HTMLSelectElement,
       params.magicItem.itemSubtype
     );
   }
