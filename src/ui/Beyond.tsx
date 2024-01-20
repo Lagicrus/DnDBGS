@@ -11,6 +11,7 @@ const Beyond = ({
   currentTab: chrome.tabs.Tab | undefined;
   toggleShowOtherDetails: () => void;
 }) => {
+  const [inProgress, setInProgress] = React.useState<boolean>(false);
   const [trackCurrentUrl, setTrackCurrentUrl] = React.useState<boolean>(false);
 
   useEffect(() => {
@@ -20,6 +21,24 @@ const Beyond = ({
       files: ['static/js/dndbidetails.js']
     });
   }, [trackCurrentUrl, currentTab?.url]);
+
+  useEffect(() => {
+    function monitorStorage(changes: Record<string, any>, area: string) {
+      if (area === 'local' && changes.orderStatus) {
+        if (changes.orderStatus.newValue === 'started') {
+          setInProgress(true);
+        } else if (changes.orderStatus.newValue === 'finished') {
+          setInProgress(false);
+        }
+      }
+    }
+
+    chrome.storage.onChanged.addListener(monitorStorage);
+
+    return () => {
+      chrome.storage.onChanged.removeListener(monitorStorage);
+    };
+  }, []);
 
   const fillInMagicCreationForm = async () => {
     const currentTab = await getCurrentTab();
@@ -59,8 +78,11 @@ const Beyond = ({
   ) {
     return (
       <div className="otherDetailsContainer">
-        <button onClick={fillInMagicItemDetails}>Fill in other details</button>
+        <button disabled={!inProgress} onClick={fillInMagicItemDetails}>
+          Fill in other details
+        </button>
         <button onClick={toggleShowOtherDetails}>ℹ️</button>
+        {inProgress && <span>🔁</span>}
       </div>
     );
   }
