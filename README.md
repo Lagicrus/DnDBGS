@@ -66,14 +66,14 @@ Builds the extension for production to the `build` folder.\
 It uses craco to override the webpack config to build specific scripts under specific names so that we can\
 run them later with executeScript.
 
-#### `run:firefox`
+#### `npm run run:firefox`
 
 Opens up firefox on Griffon Saddlebag and runs the extension from the `build` folder.
 
-#### `run:chrome`
+#### `npm run run:chrome`
 
 Opens up chrome on Griffon Saddlebag and runs the extension from the `build` folder.
 
-#### `build:extension`
+#### `npm run build:extension`
 
 Builds the extension for both firefox and chrome using `web-ext`.
