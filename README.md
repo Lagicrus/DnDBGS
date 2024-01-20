@@ -24,9 +24,9 @@ This web extension is designed to allow easy importing of Griffon Saddlebag cont
 
 ## How to install?
 
-In theory all browsers are currently supported, but I have only tested it on Firefox and Chrome.
-You can install by cloning this repo and then building the extension using `npm run build` and `npm run build:extension`.
-For Chrome you can go to `chrome://extensions/` and enable developer mode, then click on "Load unpacked" and select the `build/chrome` folder.
+In theory all browsers are currently supported, but I have only tested it on Firefox and Chrome.\
+You can install by cloning this repo and then building the extension using `npm run build` and `npm run build:extension`.\
+For Chrome you can go to `chrome://extensions/` and enable developer mode, then click on "Load unpacked" and select the `build/chrome` folder.\
 For Firefox you can go to `about:debugging#/runtime/this-firefox` and click on "Load Temporary Add-on..." and select the `build/manifest.json` file.
 
 ## What permissions does this extension require?
