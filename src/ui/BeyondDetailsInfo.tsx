@@ -39,7 +39,7 @@ export default function BeyondDetailsInfo({
         <p>Bonuses:</p>
         <p>
           {magicItemDetails?.bonuses
-            ? `Attack: ${magicItemDetails.bonuses.attackDamage}`
+            ? `Attack&Damage: ${magicItemDetails.bonuses.attackDamage}`
             : 'No bonuses found'}
         </p>
       </div>
