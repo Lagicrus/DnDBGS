@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { SaddlebagMagicItem } from '../chromeServices/DnDBeyond';
 import { getSettings } from '../utils/utils';
 
+/*
+  Shows the basic information about the magic item
+  Including optional rendering of the image based on user settings
+ */
 export default function MagicItem({
   saddlebagItem
 }: {
@@ -9,6 +13,7 @@ export default function MagicItem({
 }) {
   const [hideImage, setHideImage] = React.useState(false);
 
+  // On page load check if the user has the setting to hide images
   useEffect(() => {
     getSettings().then(options => {
       setHideImage(!options.showMagicItemImages);

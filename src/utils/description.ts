@@ -1,3 +1,4 @@
+// Handles inputting the description into the WYSIWYG editor
 export function typeDescription(description: string) {
   // iframe
   const magicItemDescriptionEditor = document.getElementById(

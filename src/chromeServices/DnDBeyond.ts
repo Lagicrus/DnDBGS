@@ -18,6 +18,9 @@ export type SaddlebagMagicItem = {
   base64Image?: string;
 };
 
+/*
+  Return a SaddlebagMagicItem from a SaddlebagItem
+ */
 export const magicItemCreator = (
   item: SaddlebagItem,
   base64Image?: string

@@ -1,3 +1,4 @@
+// Type definitions for Griffon Saddlebag Internal API
 export interface SaddlebagItem {
   attunement: boolean | string;
   bookAccessCodeGrant: string;
@@ -20,6 +21,10 @@ export interface SaddlebagItem {
   tags?: SaddlebagItemTag[];
 }
 
+// All of these types are taken from the Griffon Saddlebag API after finding all the possible options for each field
+// For free users only. Will need to rerun with a paid account to get full coverage
+
+// Tags for items
 type SaddlebagItemTag =
   | 'consumable'
   | 'container'
@@ -29,6 +34,7 @@ type SaddlebagItemTag =
   | 'cloak'
   | 'bracers';
 
+// Rarity of items or combinations thereof
 export type SaddlebagItemRarity =
   | 'very rare'
   | 'rare'
@@ -42,6 +48,7 @@ export type SaddlebagItemRarity =
   | 'uncommon or very rare'
   | 'common or rare';
 
+// Primary types of items
 export type SaddlebagItemTypes =
   | 'Weapon'
   | 'Armor'
@@ -53,6 +60,7 @@ export type SaddlebagItemTypes =
   | 'Staff'
   | 'Scroll';
 
+// Indicates what type of weapon, armour or combinations the item is
 export type SaddlebagItemSubtypes =
   | 'maul'
   | 'longbow'
@@ -114,6 +122,7 @@ export type BonusModifierSubType =
   | 'spellAttackRolls'
   | 'spellSaveDC';
 
+// Work in progress type definitions for Processed Descriptions to use in the future for Detail Form Entry
 export interface SaddlebagItemDetails {
   bonuses?: {
     attackDamage?: number;

@@ -1,6 +1,7 @@
 import { SaddlebagMagicItem } from '../chromeServices/DnDBeyond';
 import { SaddlebagItemDetails } from '../types';
 
+// Figures out the modifiers and other bonuses for the item from the description
 export default function calculateMagicItemDetails(
   magicItem: SaddlebagMagicItem
 ): SaddlebagItemDetails {

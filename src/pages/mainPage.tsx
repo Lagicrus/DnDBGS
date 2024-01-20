@@ -14,6 +14,9 @@ interface MainPageProps {
   >;
 }
 
+/*
+  Renders and handles the main page of the extension
+ */
 export default function MainPage({
   saddlebagItem,
   currentTab,
@@ -26,6 +29,8 @@ export default function MainPage({
     setShowOtherDetails(!showOtherDetails);
   };
 
+  // Override to show processed details of a magic item
+  // if the user has clicked the info button on the Beyond page
   if (showOtherDetails) {
     return (
       <BeyondDetailsInfo
@@ -39,7 +44,7 @@ export default function MainPage({
     <>
       <MagicItem saddlebagItem={saddlebagItem} />
       {currentTab?.url?.includes('thegriffonssaddlebag.com') ? (
-        <Griffon modalOpen={modalOpen} setSaddlebagItem={setSaddlebagItem} />
+        <Griffon modalOpen={modalOpen} />
       ) : (
         <Beyond
           magicItem={saddlebagItem}

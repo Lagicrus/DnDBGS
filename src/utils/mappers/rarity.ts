@@ -1,5 +1,6 @@
 import { SaddlebagItemRarity } from '../../types';
 
+// Converts the string type for Rarity into the number user by D&D Beyond for the Select element
 function saddlebagRarityToBeyondRarity(rarity: SaddlebagItemRarity) {
   switch (rarity) {
     case 'common':

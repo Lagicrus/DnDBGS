@@ -5,6 +5,9 @@ import MainPage from './pages/mainPage';
 import SettingsPage from './pages/settingsPage';
 import { SaddlebagMagicItem } from './chromeServices/DnDBeyond';
 
+/*
+  Main App component. This is the root of the application.
+ */
 function App() {
   const [saddlebagItem, setSaddlebagItem] = React.useState<
     SaddlebagMagicItem | undefined
@@ -13,6 +16,8 @@ function App() {
   const [currentTab, setCurrentTab] = React.useState<chrome.tabs.Tab>();
   const [settingsOpen, setSettingsOpen] = React.useState(false);
 
+  // On startup, get the current tab and the saddlebag item from storage
+  // and set them in state.
   useEffect(() => {
     chrome.storage.local.get('item').then(item => {
       setSaddlebagItem(item.item);
@@ -24,6 +29,7 @@ function App() {
     });
   }, []);
 
+  // Monitor tab changes to see if the current URL changes
   useEffect(() => {
     function monitorTabChange(
       tabId: number,
@@ -43,6 +49,7 @@ function App() {
     };
   }, [currentTab]);
 
+  // Monitor storage changes to see if the saddlebag item changes, so we can update state
   useEffect(() => {
     function monitorStorage(changes: Record<string, any>, area: string) {
       if (area === 'local' && changes.item) {
@@ -57,6 +64,7 @@ function App() {
     };
   }, []);
 
+  // When the settings button is clicked, toggle the settings page
   const settingsOnClick = () => {
     setSettingsOpen(!settingsOpen);
   };

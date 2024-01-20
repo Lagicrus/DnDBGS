@@ -1,5 +1,6 @@
 import { SaddlebagItemTypes } from '../../types';
 
+// Converts the string type for Magic Items into the number user by D&D Beyond for the Select element
 function saddlebagMagicItemSubtypeToBeyondSubtype(
   itemType: SaddlebagItemTypes
 ) {

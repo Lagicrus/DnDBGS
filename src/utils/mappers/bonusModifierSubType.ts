@@ -1,5 +1,6 @@
 import { BonusModifierSubType } from '../../types';
 
+// Converts the bonus modifier subtype to the number that DDB expects
 export function bonusModifierSubTypeToNumber(subType: BonusModifierSubType) {
   switch (subType) {
     case 'attackDamage':

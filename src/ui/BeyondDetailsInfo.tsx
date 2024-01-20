@@ -3,6 +3,9 @@ import { SaddlebagMagicItem } from '../chromeServices/DnDBeyond';
 import { SaddlebagItemDetails } from '../types';
 import calculateMagicItemDetails from '../utils/magicItemDetails';
 
+/*
+  Handles displaying the processed description details of a Magic Item
+ */
 export default function BeyondDetailsInfo({
   toggleShowOtherDetails,
   magicItem
@@ -22,6 +25,7 @@ export default function BeyondDetailsInfo({
     );
   }
 
+  // On page load, calculate the magic item details
   useEffect(() => {
     if (!magicItem) return;
     if (!magicItemDetails) {

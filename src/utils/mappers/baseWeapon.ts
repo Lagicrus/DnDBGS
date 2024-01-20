@@ -1,5 +1,6 @@
 import { SaddlebagItemSubtypes } from '../../types';
 
+// Converts the string type for Weapons into the number user by D&D Beyond for the Select element
 function saddlebagWeaponSubtypeToBeyondSubtype(
   itemType: SaddlebagItemSubtypes
 ) {

@@ -1,5 +1,6 @@
 import { SaddlebagItemSubtypes } from '../../types';
 
+// Converts the string type for Armour into the number user by D&D Beyond for the Select element
 function saddlebagArmorSubtypeToBeyondSubtype(itemType: SaddlebagItemSubtypes) {
   // TODO if we can't find the armor type, alert the user to flag this item on Github
   // TODO add test that all armor types are handled

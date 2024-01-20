@@ -8,6 +8,7 @@ import saddlebagWeaponSubtypeToBeyondSubtype from './mappers/baseWeapon';
 import saddlebagArmorSubtypeToBeyondSubtype from './mappers/baseArmor';
 import saddlebagMagicItemSubtypeToBeyondSubtype from './mappers/baseItem';
 
+// Convert the rarity from the saddlebag format to the beyond format and select it
 export function selectRarity(
   element: HTMLSelectElement,
   rarity: SaddlebagItemRarity
@@ -16,6 +17,7 @@ export function selectRarity(
   element.value = beyondRarity.toString();
 }
 
+// Convert the item type from the saddlebag format to the beyond format and select it
 export function selectItemBaseType(
   element: HTMLSelectElement,
   itemType: SaddlebagItemTypes
@@ -34,6 +36,7 @@ export function selectItemBaseType(
   }
 }
 
+// Convert the weapon type from the saddlebag format to the beyond format and select it
 export function selectWeaponSubtype(
   element: HTMLSelectElement,
   itemType: SaddlebagItemSubtypes
@@ -45,6 +48,7 @@ export function selectWeaponSubtype(
   element.value = beyondSubtype.toString();
 }
 
+// Convert the armor type from the saddlebag format to the beyond format and select it
 export function selectArmorSubtype(
   element: HTMLSelectElement,
   itemType: SaddlebagItemSubtypes
@@ -53,6 +57,7 @@ export function selectArmorSubtype(
   element.value = beyondSubtype.toString();
 }
 
+// Convert the magic item type from the saddlebag format to the beyond format and select it
 export function selectMagicItemSubtype(
   element: HTMLSelectElement,
   itemType: SaddlebagItemTypes

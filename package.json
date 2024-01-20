@@ -21,9 +21,7 @@
     "@types/firefox-webext-browser": "^120.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "set INLINE_RUNTIME_CHUNK=false && craco build",
-    "eject": "react-scripts eject",
     "run:firefox": "web-ext run --start-url https://ledger.thegriffonssaddlebag.com/ --source-dir build",
     "run:chrome": "web-ext run --target chromium --start-url https://ledger.thegriffonssaddlebag.com/ --source-dir build",
     "build:extension": "web-ext build --source-dir build"
