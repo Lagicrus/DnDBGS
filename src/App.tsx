@@ -25,6 +25,25 @@ function App() {
   }, []);
 
   useEffect(() => {
+    function monitorTabChange(
+      tabId: number,
+      changeInfo: chrome.tabs.TabChangeInfo,
+      tab: chrome.tabs.Tab
+    ) {
+      if (tabId === currentTab?.id && changeInfo.status === 'complete') {
+        if (!tab) return;
+        setCurrentTab(tab);
+      }
+    }
+
+    chrome.tabs.onUpdated.addListener(monitorTabChange);
+
+    return () => {
+      chrome.tabs.onUpdated.removeListener(monitorTabChange);
+    };
+  }, [currentTab]);
+
+  useEffect(() => {
     function monitorStorage(changes: Record<string, any>, area: string) {
       if (area === 'local' && changes.item) {
         setSaddlebagItem(changes.item.newValue);

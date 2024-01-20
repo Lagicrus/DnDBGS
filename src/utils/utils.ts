@@ -1,3 +1,5 @@
+import { SaddlebagItemDetails } from '../types';
+
 export async function getCurrentTab(): Promise<chrome.tabs.Tab | undefined> {
   const [tab] = await chrome.tabs.query({
     active: true,
@@ -10,7 +12,7 @@ function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function sleep(ms: number) {
+export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -39,4 +41,22 @@ export async function getSettings() {
   } else {
     return chrome.storage.sync.get('showMagicItemImages');
   }
+}
+
+export function anyKeysNotZero(obj: any) {
+  return Object.keys(obj).some(key => obj[key] !== 0);
+}
+
+export function detailsToOrderList(details: SaddlebagItemDetails) {
+  const list = [];
+
+  if (details.bonuses) {
+    for (const [key, value] of Object.entries(details.bonuses)) {
+      if (value !== 0) {
+        list.push(`bonuses-${key}-${value}`);
+      }
+    }
+  }
+
+  return list;
 }

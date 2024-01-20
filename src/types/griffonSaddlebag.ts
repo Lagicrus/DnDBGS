@@ -106,10 +106,17 @@ export type SaddlebagItemSubtypes =
   | 'longsword or rapier'
   | 'crossbow, light';
 
+export type BonusModifierSubType =
+  | 'attackDamage'
+  | 'abilityChecks'
+  | 'savingThrows'
+  | 'ac'
+  | 'spellAttackRolls'
+  | 'spellSaveDC';
+
 export interface SaddlebagItemDetails {
   bonuses?: {
-    attack?: number;
-    damage?: number;
+    attackDamage?: number;
     abilityChecks?: number;
     savingThrows?: number;
     ac?: number;

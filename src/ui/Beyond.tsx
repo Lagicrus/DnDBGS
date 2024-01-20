@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { getCurrentTab } from '../utils/utils';
 import { SaddlebagMagicItem } from '../chromeServices/DnDBeyond';
 
@@ -11,6 +11,16 @@ const Beyond = ({
   currentTab: chrome.tabs.Tab | undefined;
   toggleShowOtherDetails: () => void;
 }) => {
+  const [trackCurrentUrl, setTrackCurrentUrl] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (!trackCurrentUrl) return;
+    chrome.scripting.executeScript({
+      target: { tabId: currentTab?.id as number },
+      files: ['static/js/dndbidetails.js']
+    });
+  }, [trackCurrentUrl, currentTab?.url]);
+
   const fillInMagicCreationForm = async () => {
     const currentTab = await getCurrentTab();
     if (!currentTab) return;
@@ -23,6 +33,7 @@ const Beyond = ({
   const fillInMagicItemDetails = async () => {
     const currentTab = await getCurrentTab();
     if (!currentTab) return;
+    setTrackCurrentUrl(true);
     await chrome.scripting.executeScript({
       target: { tabId: currentTab.id as number },
       files: ['static/js/dndbidetails.js']
@@ -43,7 +54,8 @@ const Beyond = ({
   if (
     currentTab?.url?.match(
       /dndbeyond\.com\/homebrew\/creations\/magic-items\/\d+-.*\/edit/
-    )
+    ) ||
+    currentTab?.url?.match(/dndbeyond\.com\/modifier\/create\/\d{7}-\d{9}\/\d/)
   ) {
     return (
       <div className="otherDetailsContainer">

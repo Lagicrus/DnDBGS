@@ -43,8 +43,7 @@ export default function calculateMagicItemDetails(
 
   return {
     bonuses: {
-      attack: attackDamageBonus,
-      damage: attackDamageBonus,
+      attackDamage: attackDamageBonus,
       abilityChecks: abilityChecksSavingThrows,
       savingThrows: abilityChecksSavingThrows,
       ac,
