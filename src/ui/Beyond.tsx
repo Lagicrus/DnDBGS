@@ -4,10 +4,12 @@ import { SaddlebagMagicItem } from '../chromeServices/DnDBeyond';
 
 const Beyond = ({
   magicItem,
-  currentTab
+  currentTab,
+  toggleShowOtherDetails
 }: {
   magicItem: SaddlebagMagicItem | undefined;
   currentTab: chrome.tabs.Tab | undefined;
+  toggleShowOtherDetails: () => void;
 }) => {
   const fillInMagicCreationForm = async () => {
     const currentTab = await getCurrentTab();
@@ -44,7 +46,10 @@ const Beyond = ({
     )
   ) {
     return (
-      <button onClick={fillInMagicItemDetails}>Fill in other details</button>
+      <div className="otherDetailsContainer">
+        <button onClick={fillInMagicItemDetails}>Fill in other details</button>
+        <button onClick={toggleShowOtherDetails}>ℹ️</button>
+      </div>
     );
   }
 

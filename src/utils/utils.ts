@@ -27,8 +27,6 @@ export async function fillInField(element: HTMLInputElement, text: string) {
 
 export function inFirefox() {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     return browser !== undefined;
   } catch (e) {
     return false;

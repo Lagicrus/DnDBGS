@@ -105,3 +105,15 @@ export type SaddlebagItemSubtypes =
   | 'crossbow, heavy'
   | 'longsword or rapier'
   | 'crossbow, light';
+
+export interface SaddlebagItemDetails {
+  bonuses?: {
+    attack?: number;
+    damage?: number;
+    abilityChecks?: number;
+    savingThrows?: number;
+    ac?: number;
+    spellAttackRolls?: number;
+    spellSaveDC?: number;
+  };
+}
